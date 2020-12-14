@@ -1,0 +1,27 @@
+Arguments: 
+  /usr/local/bin/node /usr/share/yarn/bin/yarn.js add tailwindcss
+
+PATH: 
+  /home/verrandy/Android/Sdk/platform-tools:/home/verrandy/Android/Sdk/tools:/home/verrandy/flutter/bin:/home/verrandy/.sdkman/candidates/gradle/current/bin:/home/yasuo/flutter/bin:/home/verrandy/gradle-6.2.2-bin/gradle-6.2.2//bin:/home/verrandy/.local/bin:/home/verrandy/gradle-6.2.2-bin/gradle-6.2.2//bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+Yarn version: 
+  1.22.5
+
+Node version: 
+  14.15.1
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: getaddrinfo EAI_AGAIN registry.yarnpkg.com
+      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:67:26)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

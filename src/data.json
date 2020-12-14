@@ -1,0 +1,21 @@
+[
+  		{
+  			"images": "images/dummy.png",
+  			"title": "Teh",
+  			"price": 10000,
+  			"desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et mauris orci. Duis maximus sodales augue, sed mollis leo rutrum sed."
+  		},
+  		{
+  			"images": "images/dummy.png",
+  			"title": "Teh",
+  			"price": 10000,
+  			"desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et mauris orci. Duis maximus sodales augue, sed mollis leo rutrum sed."
+  		},
+
+  		{
+  			"images": "images/teh_cengkeh.jpg",
+  			"title": "Teh",
+  			"price": 10000,
+  			"desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et mauris orci. Duis maximus sodales augue, sed mollis leo rutrum sed."
+  		}
+]

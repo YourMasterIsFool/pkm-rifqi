@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="src/tailwind.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <title>Document</title>
+</head>
+<body>
+  
+ <div id="app">
+    <div id="header">
+    
+      <div class="container navbar-wrap px-4 lg:px-0 mx-auto">
+        <h2 class="text-white text-2xl italic font-bold">Mine</h2>
+      </div>
+  
+   </div>
+    <div id="main-content" class="container mx-auto px-4 md:px-0 py-1 mb-10 md:py-2"> 
+      <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <card-item  v-for="(item, index) in items" :key="index" :index="index" :show-btncart="true"
+        :show-btnitem="false" :number="1" :carts="carts" :item="item"  :price="item.price"></card-item>
+        </div>
+      </div>
+      <p>{{name}}</p>
+      <cart :show-cart="false" :items="items" :carts="carts">
+      </cart>
+
+  <div class="modal py-4 lg:py-8 container-fluid">
+    
+    <div class="container flex flex-col w-full lg:w-1/3 px-10 py-6 modal-content mx-auto h-full">
+      <div class="relative mb-4">
+        <button @click="btnCloseModal()" class="btn-close">
+      <span class="material-icons">close</span>
+      </div>
+    </button>
+       <!--  <form @submit="payment" action=""> -->
+        <div class="form-group">
+          <label for="nama"  class="input-label">Nama</label>
+          <input type="text" v-model="full_name"  required class="form-input" name="">
+          <span>
+            
+            {{ errors.full_name }}
+          </span>
+        </div>
+        <div class="form-group">
+          <label for="nama" class="input-label">Alamat</label>
+          <textarea name="" v-model="address"  required  rows="4" style="height: auto;" class="form-input"></textarea>
+          
+        </div>
+        <div class="form-group">
+          <label for="nama" class="input-label">No. Handphone</label>
+          <input type="text" v-model="phone_number"   required class="form-input" name="">
+          
+        </div>
+
+      </form>
+        <h2 class="text-xl mt-4 mb-2 text-gray-500 font-bold">Item</h2>
+        <div class="payment-item">
+          <table class="w-full">
+            <thead>
+              <tr>
+                <td width="10%">No</td>
+                <td width="30%">Items</td>
+                <td width="20%">Price</td>
+                <td width="10%" style="padding-right: 10px;">Count</td>
+                <td width="20%">Total</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(item, index) in carts" :key="index">
+                <td width="10%">{{index+1}}</td>
+                <td width="40%">{{item.title}}</td>
+                <td width="20%">{{item.price}}</td>
+                <td width="10%" style="padding-right: 10px;">{{item.count}}</td>
+                <td width="20%">{{item.total}}</td>
+             </tr>
+            </tbody>
+          </table>
+          <h2 class="text-xl font-semibold mt-4 text-gray-500 text-center" v-bind:style="{ display: [carts.length == 0? 'block': 'none']}">No Item List</h2>
+        </div>
+        <hr class="mt-4">
+        <p class="text-md font-semibold  mt-2 text-gray-500">Total: Rp {{totalPrice}}</p>
+        <button @click="bayar" class="btn mt-4 w-full h-12 p-4 text-white font-bold uppercase">Bayar</button>
+
+    </div>
+  </div>    
+</div>
+  
+  <script type="text/javascript" src="src/js/vue.min.js">
+  </script>
+  <script type="text/javascript" src="src/my.js">
+  </script>
+
+
+</body>
+</html>
+
+<style>
+  #header {
+    background-color: #f5b461 ;
+  }
+  .navbar-wrap {
+   
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+  }
+
+  #main-content {
+    margin-top: 60px;
+  
+  }
+
+  .card {
+    padding:20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px 1px #e4e4e4;
+    transition-duration: .6s ;
+  }
+  .card:hover{
+    box-shadow: 0px 0px 10px 2px #cacaca;
+  }
+  .card .price {
+   color: #f5b461 ;
+   font-size: 16px;
+  }
+  .card img {
+    box-shadow: 0px 0px 4px 0px #cacaca;
+    height: 200px;
+
+  }
+
+  @keyframes slide {
+    from {
+      bottom: -260px;
+    }
+    to {
+      bottom: 0px;
+    }
+  }
+
+  .card .text {
+    font-size: 14px;
+    animation-name: slide;
+    bottom: -260px;
+    animation-duration: 2s;
+  }
+
+  .btn {
+    background-color: #fd8c04;
+    outline: none !important;
+    color:white;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  .cart {
+    position: fixed;
+    background-color: white;
+    z-index: 11;
+    right: 20px;
+    border: 2px solid #fd8c04;
+    width: 300px;
+    bottom: 0px;
+    height: 40px;
+    border-top: none;
+    border-radius: 10px 10px 0px 0px;
+
+  }
+
+  @media only screen and (max-width: 576px) 
+  {
+    .cart{
+      width: 100%;
+      right: 0px;
+    }
+  }
+  .anm-increase-height {
+    height: 400px;
+    animation-name: anm-increase-height;
+    animation-duration: .4s;
+  }
+
+  .anm-decrease-height {
+    height: 40px;
+    animation-name: anm-decrease-height;
+    animation-duration: .4s;
+  }
+
+
+  @keyframes slide-left {
+    from {
+      margin-left: 0px;
+    }
+    to {
+      margin-left: 100px;
+    }
+  }
+
+  @keyframes anm-decrease-height {
+    from {
+      height: 400px;
+    }
+    to {
+      height: 40px;
+    }
+  }
+
+  @keyframes anm-increase-height {
+    from {
+      height: 40px;
+    }
+    to {
+      height: 400px;
+    }
+  }
+
+  .coba{
+    height: 100px;
+    width: 100px;
+    margin-left: 0px;
+    animation-name: slide-left;
+    animation-duration: 2s;
+    background-color: black;
+  }
+
+  .cart .header {
+    min-height: 40px;
+    background-color: #fd8c04;
+    border-radius: 10px 10px 0px 0px;
+    cursor: pointer;
+    ;
+  }
+
+n
+  .btn .icon {
+    vertical-align: middle;
+    font-size:20px;
+  }
+
+  .items .btn:hover {
+    background-color: white;
+  }
+
+  .items .btn-remove-cart {
+    color:white !important;
+    font-weight: bold;
+    font-size:16px;
+    background-color: #C03020 !important;
+    border-radius: 5px;
+  }
+  .items .btn-remove-cart span{
+    color: white !important;
+  }
+
+  .items .btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #fd8c04 ;
+  }
+  .items .number {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fd8c04 ;
+  }
+  .items .material-icons {
+    text-align: center;
+    color: #fd8c04 ;
+    font-weight: bold;
+    
+  }
+
+  .cart .body{
+    overflow-y: auto;
+  }
+
+  .items button:hover {
+    background-color: white;
+    color: #fd8c04 ;
+  }
+
+  .material-icons {
+    vertical-align: middle;
+  }
+
+
+  .modal {
+    display: none;
+    position:fixed;
+    z-index:100;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(0,0,0);
+    background-color: rgb(0,0,0,0.4);
+  }
+
+  .modal-content {
+    border-radius: 10px;
+    overflow-y: auto;
+    background-color: white;
+  }
+
+  .form-group{
+    display: flex;
+    flex-direction: column;
+    padding:8px 0px;
+  }
+
+  .form-group label {
+    color: gray;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    
+  }
+  .form-input {
+    display: block;
+    background-color: #E4E4E4;
+    width: 100%;
+    color: gray;
+    height: 48px;
+    padding: 6px 12px;
+    border-radius: 10px;
+    outline: none !important;
+    transition-duration: .1s;
+  }
+
+  .form-input:focus{
+    border:2px solid #fd8c04;
+
+  }
+
+  table {
+    margin-top: 4px;
+  }
+  thead td {
+    font-weight: bold;
+    color:gray;
+    font-size: 16px;
+  }
+  tbody td{
+    font-size:14px;
+    padding:10px 0px;
+    color: gray;
+    font-weight: 600;
+  }
+
+  .btn-close{
+    position: absolute;
+    top: 2px;
+    right: 0px;
+  }
+</style>
